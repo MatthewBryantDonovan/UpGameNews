@@ -30,16 +30,12 @@ app.use(express.static("public"));
 //   useNewUrlParser: true
 // });
 
-var MONGOLAB_URI = process.env.MONGOLABL_URI || "mongodb://localhost/upGameNewsDB";
+var MONGOLAB_URI = process.env.MONGOLABL_URI;
 
 mongoose.connect(MONGOLAB_URI);
 
 // Import routes and give the server access to them.
-// require("./controller/controller.js")(app);
-
-app.get("/", function (req, res) {
-  res.render("index", {});
-});
+require("./controller/controller.js")(app);
 
 // Start the server
 app.listen(PORT, function () {
