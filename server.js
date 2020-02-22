@@ -30,9 +30,9 @@ app.use(express.static("public"));
 //   useNewUrlParser: true
 // });
 
-var MONGOLAB_URI = process.env.MONGOLABL_URI;
+var MONGODB_URI = process.env.MONGODB_URI;
 
-mongoose.connect(MONGOLAB_URI);
+mongoose.connect(MONGODB_URI);
 
 // Import routes and give the server access to them.
 // require("./controller/controller.js")(app);
