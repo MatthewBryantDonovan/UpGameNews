@@ -30,7 +30,7 @@ module.exports = function (app) {
     });
 
     // A GET route for scraping the gamespot website
-    app.get("/rando", function (req, res) {
+    app.get("/articles/scraped", function (req, res) {
 
         // Grab body of the gamespot html
         axios.get("https://www.gamespot.com/").then(function (response) {
