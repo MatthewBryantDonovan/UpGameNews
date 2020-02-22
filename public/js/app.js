@@ -1,33 +1,22 @@
-// Grab the articles as a JSON an populate the page with them
-$.getJSON("/articles", function (data) {
-  for (var i = 0; i < data.length; i++) {
-    $("#articles").append("<div class='borderBox row article" + data[i]._id + "'>" +
-      "<a class='' href='https://www.gamespot.com" + data[i].link + "' target='_blank' >" +
-      "<img class='col m3 articleImg' src='" + data[i].img + "'></a>" +
-      "<p class='col m9 articleTitle' data-id='" + data[i]._id + "'>" + data[i].title + "</p><br /><br />" +
-      "<p class='col m12' data-id='" + data[i]._id + "'>" + data[i].summary + "</p>" +
-      "<button class='left btn articleBtn deleteArticle' data-id='" + data[i]._id + "'>Delete article</button>" +
-      "<button class='right btn articleBtn saveArticle' data-id='" + data[i]._id + "'>Save article</button>" +
-      "</div><div class='row notes note" + data[i]._id + "'></div>");
-  }
+$(document).ready(function(){
+  $('.sidenav').sidenav();
 });
-
 
 // On click to display notes
 $(document).on("click", "p", function () {
   $(".notes").empty();
   var thisId = $(this).attr("data-id");
   var isSaved = $(this).attr("data-saved");
-  console.log(isSaved);
+  
 
-  if (isSaved) {
+  if (isSaved == "true") {
     // Ajax call for the Article to display notes
     $.ajax({
         method: "GET",
-        url: "/articles/saved/" + thisId
+        url: "/api/articles/saved/" + thisId
       })
       .then(function (data) {
-        console.log(data._id);
+        console.log(data);
         $(".note" + data._id).append("<h2 class='center'>" + data.title + "</h2>");
 
         for (let index = 0; index < (data.note.length + 1); index++) {
@@ -56,10 +45,10 @@ $(document).on("click", "p", function () {
     // Ajax call for the Article to display notes
     $.ajax({
         method: "GET",
-        url: "/articles/" + thisId
+        url: "/api/articles/" + thisId
       })
       .then(function (data) {
-        console.log(data._id);
+        console.log(data);
         $(".note" + data._id).append("<h2 class='center'>" + data.title + "</h2>");
 
         for (let index = 0; index < (data.note.length + 1); index++) {
@@ -88,55 +77,13 @@ $(document).on("click", "p", function () {
 
 });
 
-// On click show current articles
-$(document).on("click", ".currentArticles", function () {
-  $("#articles").empty();
-  $.getJSON("/articles", function (data) {
-    for (var i = 0; i < data.length; i++) {
-      $("#articles").append("<div class='borderBox row article" + data[i]._id + "'>" +
-        "<a class='' href='https://www.gamespot.com" + data[i].link + "' target='_blank' >" +
-        "<img class='col m3 articleImg' src='" + data[i].img + "'></a>" +
-        "<p class='col m9 articleTitle' data-id='" + data[i]._id + "'>" + data[i].title + "</p><br /><br />" +
-        "<p class='col m12' data-id='" + data[i]._id + "'>" + data[i].summary + "</p>" +
-        "<button class='left btn articleBtn deleteArticle' data-id='" + data[i]._id + "'>Delete article</button>" +
-        "<button class='right btn articleBtn saveArticle' data-id='" + data[i]._id + "'>Save article</button>" +
-        "</div><div class='row notes note" + data[i]._id + "'></div>");
-    }
-    $(".notes").empty();
-  });
-});
-
-// On click show saved articles
-$(document).on("click", ".savedArticles", function () {
-  $.ajax({
-      method: "GET",
-      url: "/articles/saved",
-    })
-    .then(function (data) {
-      $("#articles").empty();
-      console.log(data);
-
-      for (var i = 0; i < data.length; i++) {
-        $("#articles").append("<div class='borderBox row article" + data[i]._id + "'>" +
-          "<a class='' href='https://www.gamespot.com" + data[i].link + "' target='_blank' >" +
-          "<img class='col m3 articleImg' src='" + data[i].img + "'></a>" +
-          "<p class='col m9 articleTitle' data-saved='true' data-id='" + data[i]._id + "'>" + data[i].title + "</p><br /><br />" +
-          "<p class='col m12' data-saved='true' data-id='" + data[i]._id + "'>" + data[i].summary + "</p>" +
-          "<button class='left btn articleBtn deleteSavedArticle' data-id='" + data[i]._id + "'>Delete article</button>" +
-          "</div><div class='row notes note" + data[i]._id + "'></div>");
-      }
-      $(".notes").empty();
-    });
-
-});
-
 // On click to save article to the database
 $(document).on("click", ".saveArticle", function () {
   var thisId = $(this).attr("data-id");
 
   $.ajax({
       method: "GET",
-      url: "/articles/save/" + thisId,
+      url: "/api/articles/save/" + thisId,
     })
     .then(function (data) {
       console.log(data);
@@ -151,7 +98,7 @@ $(document).on("click", ".deleteArticle", function () {
 
   $.ajax({
       method: "DELETE",
-      url: "/articles/" + thisId,
+      url: "/api/articles/" + thisId,
     })
     .then(function (data) {
       console.log(data);
@@ -160,6 +107,23 @@ $(document).on("click", ".deleteArticle", function () {
     });
 
   // TODO: Have a saved message for confirmation!
+
+});
+
+
+//TODO: /articles/scraped
+// On click to delete articles from the database
+$(document).on("click", ".deleteAll", function () {
+
+  $.ajax({
+      method: "get",
+      url: "/api/del",
+    })
+    .then(function (data) {
+      console.log(data);
+      window.location.href("/");
+      window.location.reload();
+    });
 
 });
 
@@ -169,7 +133,7 @@ $(document).on("click", ".deleteSavedArticle", function () {
 
   $.ajax({
       method: "DELETE",
-      url: "/articles/saved/" + thisId,
+      url: "/api/articles/saved/" + thisId,
     })
     .then(function (data) {
       console.log(data);
@@ -181,7 +145,7 @@ $(document).on("click", ".deleteSavedArticle", function () {
 
 });
 
-// On click to save notes to the database
+// On click to save unsaved article notes to the database
 $(document).on("click", ".savenote", function () {
   var thisId = $(this).attr("data-id");
   var thisNote = $(this).attr("data-note");
@@ -189,7 +153,28 @@ $(document).on("click", ".savenote", function () {
 
   $.ajax({
       method: "POST",
-      url: "/articles/" + thisId + "/" + thisNote,
+      url: "/api/articles/" + thisId + "/" + thisNote,
+      data: {
+        title: $(".titleinput" + thisIndex).val(),
+        body: $(".bodyinput" + thisIndex).val()
+      }
+    })
+    .then(function (data) {
+      console.log(data);
+      $(".notes").empty();
+    });
+
+});
+
+// On click to save SAVED article notes to the database
+$(document).on("click", ".savenote", function () {
+  var thisId = $(this).attr("data-id");
+  var thisNote = $(this).attr("data-note");
+  var thisIndex = $(this).attr("data-index");
+
+  $.ajax({
+      method: "POST",
+      url: "/api/articles/saved/" + thisId + "/" + thisNote,
       data: {
         title: $(".titleinput" + thisIndex).val(),
         body: $(".bodyinput" + thisIndex).val()
@@ -209,7 +194,7 @@ $(document).on("click", ".deletenote", function () {
 
   $.ajax({
       method: "DELETE",
-      url: "/articles/" + thisId + "/" + thisNote,
+      url: "/api/articles/" + thisId + "/" + thisNote,
     })
     .then(function (data) {
       console.log(data);

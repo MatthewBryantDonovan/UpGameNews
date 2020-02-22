@@ -1,15 +1,46 @@
-  <nav>
+{{!--   <nav>
     <div class="nav-wrapper">
       <ul id="nav-mobile" class="right">
-        <li><button class="savedArticles left">Saved Articles</button></li>
-        <li><button class="currentArticles right">Current Articles</button></li>
+        <h1 class="center">Up Game News!</h1>
+        <li><a href="/articles/saved" class="savedArticles left">Saved Articles</a></li>
+        <li><a href="/articles" class="currentArticles right">Current Articles</a></li>
+      </ul>
+    </div>
+  </nav> --}}
+  {{!--  --}}
+  <nav>
+    <div class="nav-wrapper black row">
+      <a href="#" id="logo-main" class="brand-logo center">Up Game News!</a>
+      <a href="#" data-target="mobile-demo" class="sidenav-trigger right"><i class="material-icons">menu</i></a>
+      <ul class="right hide-on-med-only hide-on-small-only">
+        <li><a href="/articles" class="currentArticles right">Current Articles</a></li>
+        <li><a href="/articles/saved" class="savedArticles left">Saved Articles</a></li>
+        <li><a href="/articles/scraped" class="scrapeArticles right">Scrape Articles</a></li>
+        <li><a href="/delete/all" class="deleteAll right">Delete Articles</a></li>
       </ul>
     </div>
   </nav>
-  <div class="container">
-    <h1 class="center">Up Game News!</h1>
+
+  <ul class="sidenav grey darken-4" id="mobile-demo">
+      <li><a href="/articles" class="currentArticles left white-text">Current Articles</a></li>
+      <li><a href="/articles/saved" class="savedArticles left white-text">Saved Articles</a></li>
+      <li><a href="/articles/scraped" class="currentArticles left white-text">Scrape Articles</a></li>
+      <li><a href="/api/del" class="currentArticles left white-text">Delete Articles</a></li>
+  </ul>
+
+
+  {{!--  --}}
     <h2 class="center"><i>News for games, movies, and more!</i></h2>
+  <div class="container">
+    <h3>{{urlAddr}} Articles</h3>
     <div class="row">
-      <div id="articles" class="col m12"></div>
+
+      {{#unless saved}}
+      {{> articles/articles-block showSaved=false}}
+      {{/unless}}
+
+      {{#if saved}}
+      {{> articles/articles-block showSaved=true}}
+      {{/if}}
     </div>
   </div>

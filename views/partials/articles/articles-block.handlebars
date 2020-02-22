@@ -1,0 +1,13 @@
+    {{#each article}}
+      <div class='borderBox row article{{this._id}} z-depth-5'>
+        <a class='' href='https://www.gamespot.com{{this.link}}' target='_blank'>
+          <img class='z-depth-5 col m3 articleImg' src='{{img}}'></a>
+        <p class='col m9 articleTitle' data-saved='{{../showSaved}}' data-id='{{this._id}}'>{{this.title}}</p><br /><br />
+        <p class='col m12' data-saved='{{../showSaved}}' data-id='{{this._id}}'> {{this.summary}} </p>
+        <button class='green darken-3 z-depth-5 left btn articleBtn {{#if ../showSaved}}deleteSavedArticle{{else}}deleteArticle{{/if}}' data-id='{{this._id}}'>Delete article</button>
+        {{#unless ../showSaved}}
+            <button class='red darken-4 z-depth-5 right btn articleBtn saveArticle' data-id='{{this._id}}'>Save article</button>
+        {{/unless}}
+      </div>
+      <div class='row notes note{{this._id}} '></div>
+    {{/each}}
