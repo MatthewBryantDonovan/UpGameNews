@@ -15,8 +15,12 @@ var cheerio = require("cheerio");
 // =============================================================
 module.exports = function (app) {
     // Routes
-    // A GET route for scraping the gamespot website
     app.get("/", function (req, res) {
+        res.json("sdakfjhlasdkhf")
+    });
+
+    // A GET route for scraping the gamespot website
+    app.get("/rando", function (req, res) {
 
         // Grab body of the gamespot html
         axios.get("https://www.gamespot.com/").then(function (response) {
