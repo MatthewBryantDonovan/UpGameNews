@@ -17,17 +17,18 @@ module.exports = function (app) {
     // Routes
 
     app.get("/", function (req, res) {
-        db.Article.find({}).sort({date: -1}).
-        then(function (data) {
-            var hbsObj = {
-                urlAddr: "Current",
-                saved: false,
-                article: data
-            }
-            res.render("index", hbsObj);
-        }).catch(function (err) {
-            console.log(err);
-        });
+        // db.Article.find({}).sort({date: -1}).
+        // then(function (data) {
+        //     var hbsObj = {
+        //         urlAddr: "Current",
+        //         saved: false,
+        //         article: data
+        //     }
+        //     res.render("index", hbsObj);
+        // }).catch(function (err) {
+        //     console.log(err);
+        // });
+        res.redirect("/articles/scraped");
     });
 
     // Route for getting all Articles from the db
