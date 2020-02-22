@@ -26,9 +26,13 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/upGameNewsDB", {
-  useNewUrlParser: true
-});
+// mongoose.connect("mongodb://localhost/upGameNewsDB", {
+//   useNewUrlParser: true
+// });
+
+var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/upGameNewsDB";
+
+mongoose.connect(MONGODB_URI);
 
 // Import routes and give the server access to them.
 require("./controller/controller.js")(app);

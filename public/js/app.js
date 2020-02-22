@@ -24,7 +24,7 @@ $(document).on("click", "p", function () {
           if (data.note[index]) {
             noteID = data.note[index]._id;
           }
-          $(".note" + data._id).append("<div class='noteArea col m4 " + index + "noteArea" + data._id + "'></div>");
+          $(".note" + data._id).append("<div class='noteArea col s12 m6 l4 " + index + "noteArea" + data._id + "'></div>");
           $("." + index + "noteArea" + data._id).append("<h2 class='center'> Note #" + (index + 1) + "</h2>");
           $("." + index + "noteArea" + data._id).append("<input class='titleinput" + [index] + "' name='title' style='background-color: #FCF5C7; border: 2px solid black'>");
           $("." + index + "noteArea" + data._id).append("<textarea class='bodyinput" + [index] + "' name='body' style='background-color: #FCF5C7; border: 2px solid black'></textarea>");
@@ -56,7 +56,7 @@ $(document).on("click", "p", function () {
           if (data.note[index]) {
             noteID = data.note[index]._id;
           }
-          $(".note" + data._id).append("<div class='noteArea col m4 " + index + "noteArea" + data._id + "'></div>");
+          $(".note" + data._id).append("<div class='noteArea col s12 m6 l4 " + index + "noteArea" + data._id + "'></div>");
           $("." + index + "noteArea" + data._id).append("<h2 class='center'> Note #" + (index + 1) + "</h2>");
           $("." + index + "noteArea" + data._id).append("<input class='titleinput" + [index] + "' name='title' style='background-color: #FCF5C7; border: 2px solid black'>");
           $("." + index + "noteArea" + data._id).append("<textarea class='bodyinput" + [index] + "' name='body' style='background-color: #FCF5C7; border: 2px solid black'></textarea>");

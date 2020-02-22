@@ -62,11 +62,7 @@ module.exports = function (app) {
 
     app.get("/delete/all", function (req, res) {
         db.Article.deleteMany({}).then(function (data) {
-            db.SavedArticle.deleteMany({}).then(function (data) {
-                res.render("index", {urlAddr: "Deleted All"});
-            }).catch(function (err) {
-                console.log(err);
-            });
+            res.render("index", {urlAddr: "Deleted All"});
         }).catch(function (err) {
             console.log(err);
         });
