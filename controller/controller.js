@@ -15,62 +15,8 @@ var cheerio = require("cheerio");
 // =============================================================
 module.exports = function (app) {
     // Routes
-
-    app.get("/", function (req, res) {
-        // db.Article.find({}).sort({date: -1}).
-        // then(function (data) {
-        //     var hbsObj = {
-        //         urlAddr: "Current",
-        //         saved: false,
-        //         article: data
-        //     }
-        //     res.render("index", hbsObj);
-        // }).catch(function (err) {
-        //     console.log(err);
-        // });
-        res.redirect("/articles/scraped");
-    });
-
-    // Route for getting all Articles from the db
-    app.get("/articles", function (req, res) {
-        db.Article.find({}).sort({date: -1}).
-        then(function (data) {
-            var hbsObj = {
-                urlAddr: "Current",
-                saved: false,
-                article: data
-            }
-            res.render("index", hbsObj);
-        }).catch(function (err) {
-            console.log(err);
-        });
-    });
-
-    // Route for getting all Saved Articles from the db
-    app.get("/articles/saved", function (req, res) {
-        db.SavedArticle.find({}).sort({date: -1}).
-        then(function (data) {
-            var hbsObj = {
-                urlAddr: "Saved",
-                saved: true,
-                article: data
-            }
-            res.render("index", hbsObj);
-        }).catch(function (err) {
-            console.log(err);
-        });
-    });
-
-    app.get("/delete/all", function (req, res) {
-        db.Article.deleteMany({}).then(function (data) {
-            res.render("index", {urlAddr: "Deleted All"});
-        }).catch(function (err) {
-            console.log(err);
-        });
-    });
-
     // A GET route for scraping the gamespot website
-    app.get("/articles/scraped", function (req, res) {
+    app.get("/", function (req, res) {
 
         // Grab body of the gamespot html
         axios.get("https://www.gamespot.com/").then(function (response) {
@@ -183,6 +129,45 @@ module.exports = function (app) {
             });
         });
     });
+
+    // Route for getting all Articles from the db
+    app.get("/articles", function (req, res) {
+        db.Article.find({}).sort({date: -1}).
+        then(function (data) {
+            var hbsObj = {
+                urlAddr: "Current",
+                saved: false,
+                article: data
+            }
+            res.render("index", hbsObj);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    });
+
+    // Route for getting all Saved Articles from the db
+    app.get("/articles/saved", function (req, res) {
+        db.SavedArticle.find({}).sort({date: -1}).
+        then(function (data) {
+            var hbsObj = {
+                urlAddr: "Saved",
+                saved: true,
+                article: data
+            }
+            res.render("index", hbsObj);
+        }).catch(function (err) {
+            console.log(err);
+        });
+    });
+
+    app.get("/delete/all", function (req, res) {
+        db.Article.deleteMany({}).then(function (data) {
+            res.render("index", {urlAddr: "Deleted All"});
+        }).catch(function (err) {
+            console.log(err);
+        });
+    });
+
 
     // Route for Saving Articles
     app.get("/api/articles/save/:id", function (req, res) {
