@@ -16,7 +16,7 @@ var cheerio = require("cheerio");
 module.exports = function (app) {
     // Routes
     app.get("/", function (req, res) {
-        res.json("sdakfjhlasdkhf")
+        res.render("index", {});
     });
 
     // A GET route for scraping the gamespot website
