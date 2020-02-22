@@ -30,9 +30,9 @@ app.use(express.static("public"));
 //   useNewUrlParser: true
 // });
 
-var MONGOLAB_TEAL_URI = process.env.MONGOLAB_TEAL_URI || "mongodb://localhost/upGameNewsDB";
+var MONGOLAB_URI = process.env.MONGOLABL_URI || "mongodb://localhost/upGameNewsDB";
 
-mongoose.connect(MONGOLAB_TEAL_URI);
+mongoose.connect(MONGOLAB_URI);
 
 // Import routes and give the server access to them.
 require("./controller/controller.js")(app);
