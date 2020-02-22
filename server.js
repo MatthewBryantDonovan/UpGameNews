@@ -35,12 +35,7 @@ var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/upGameNewsDB";
 mongoose.connect(MONGODB_URI);
 
 // Import routes and give the server access to them.
-// require("./controller/controller.js")(app);
-
-    // Routes
-    app.get("/", function (req, res) {
-      res.json({index: "index"});
-  });
+require("./controller/controller.js")(app);
 
 // Start the server
 app.listen(PORT, function () {

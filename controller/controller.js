@@ -16,7 +16,17 @@ var cheerio = require("cheerio");
 module.exports = function (app) {
     // Routes
     app.get("/", function (req, res) {
-        res.render("index", {});
+        db.Article.find({}).sort({date: -1}).
+        then(function (data) {
+            var hbsObj = {
+                urlAddr: "Current",
+                saved: false,
+                article: data
+            }
+            res.render("index", hbsObj);
+        }).catch(function (err) {
+            console.log(err);
+        });
     });
 
     // A GET route for scraping the gamespot website
@@ -407,7 +417,17 @@ module.exports = function (app) {
     });
 
     app.get("*", function (req, res) {
-        res.render("index", {});
+        db.Article.find({}).sort({date: -1}).
+        then(function (data) {
+            var hbsObj = {
+                urlAddr: "Current",
+                saved: false,
+                article: data
+            }
+            res.render("index", hbsObj);
+        }).catch(function (err) {
+            console.log(err);
+        });
     })
 
 }
