@@ -15,22 +15,9 @@ var cheerio = require("cheerio");
 // =============================================================
 module.exports = function (app) {
     // Routes
-    app.get("/", function (req, res) {
-        db.Article.find({}).sort({date: -1}).
-        then(function (data) {
-            var hbsObj = {
-                urlAddr: "Current",
-                saved: false,
-                article: data
-            }
-            res.render("index", hbsObj);
-        }).catch(function (err) {
-            console.log(err);
-        });
-    });
 
     // A GET route for scraping the gamespot website
-    app.get("/articles/scraped", function (req, res) {
+    app.get("/", function (req, res) {
 
         // Grab body of the gamespot html
         axios.get("https://www.gamespot.com/").then(function (response) {
@@ -417,17 +404,7 @@ module.exports = function (app) {
     });
 
     app.get("*", function (req, res) {
-        db.Article.find({}).sort({date: -1}).
-        then(function (data) {
-            var hbsObj = {
-                urlAddr: "Current",
-                saved: false,
-                article: data
-            }
-            res.render("index", hbsObj);
-        }).catch(function (err) {
-            console.log(err);
-        });
+        res.redirect("/");
     })
 
 }
