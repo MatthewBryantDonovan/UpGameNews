@@ -28,10 +28,10 @@ $(document).on("click", "p", function () {
           $("." + index + "noteArea" + data._id).append("<h2 class='center'> Note #" + (index + 1) + "</h2>");
           $("." + index + "noteArea" + data._id).append("<input class='titleinput" + [index] + "' name='title' style='background-color: #FCF5C7; border: 2px solid black'>");
           $("." + index + "noteArea" + data._id).append("<textarea class='bodyinput" + [index] + "' name='body' style='background-color: #FCF5C7; border: 2px solid black'></textarea>");
-          $("." + index + "noteArea" + data._id).append("<button class='left btn savenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Save Note</button>");
+          $("." + index + "noteArea" + data._id).append("<button class='red darken-4 z-depth-5left btn savenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Save Note</button>");
 
           if (data.note.length != index) {
-            $("." + index + "noteArea" + data._id).append("<button class='right btn deletenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Delete Note</button>");
+            $("." + index + "noteArea" + data._id).append("<button class='green darken-3 z-depth-5 right btn deletenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Delete Note</button>");
           }
 
           if (data.note[index]) {
@@ -60,10 +60,10 @@ $(document).on("click", "p", function () {
           $("." + index + "noteArea" + data._id).append("<h2 class='center'> Note #" + (index + 1) + "</h2>");
           $("." + index + "noteArea" + data._id).append("<input class='titleinput" + [index] + "' name='title' style='background-color: #FCF5C7; border: 2px solid black'>");
           $("." + index + "noteArea" + data._id).append("<textarea class='bodyinput" + [index] + "' name='body' style='background-color: #FCF5C7; border: 2px solid black'></textarea>");
-          $("." + index + "noteArea" + data._id).append("<button class='left btn savenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Save Note</button>");
+          $("." + index + "noteArea" + data._id).append("<button class='red darken-4 z-depth-5 left btn savenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Save Note</button>");
 
           if (data.note.length != index) {
-            $("." + index + "noteArea" + data._id).append("<button class='right btn deletenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Delete Note</button>");
+            $("." + index + "noteArea" + data._id).append("<button class='green darken-3 z-depth-5 right btn deletenote' data-id='" + data._id + "' data-note='" + noteID + "' data-index='" + index + "'>Delete Note</button>");
           }
 
           if (data.note[index]) {

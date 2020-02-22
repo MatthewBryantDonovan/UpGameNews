@@ -26,12 +26,39 @@ textarea {
   margin: 6px;
 }
 
+.glow {
+  color: #fff;
+  text-align: center;
+  -webkit-animation: glow 1s ease-in-out infinite alternate;
+  -moz-animation: glow 1s ease-in-out infinite alternate;
+  animation: glow 1s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes glow {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #00d7e6, 0 0 40px #00d7e6, 0 0 50px #00d7e6, 0 0 60px #00d7e6, 0 0 70px #00d7e6;
+  }
+  
+  to {
+    text-shadow: 0 0 20px #fff, 0 0 30px #4ddbff, 0 0 40px #4ddbff, 0 0 50px #4ddbff, 0 0 60px #4ddbff, 0 0 70px #4ddbff, 0 0 80px #4ddbff;
+  }
+}
+
 h2{
   font-size: 30px;
+  color: white;
+  text-shadow: 0 0 3px rgb(0, 200, 207), 0 0 5px rgb(0, 111, 155); 
+}
+
+h3{
+  color: white;
+  text-shadow: 0 0 3px rgb(0, 200, 207), 0 0 5px rgb(0, 111, 155); 
 }
 
 p{
   font-size: 20px;
+  color: white;
+  text-shadow: 0 0 3px rgb(0, 200, 207), 0 0 5px rgb(0, 111, 155); 
 }
 .articleImg{
   background-color: black;
