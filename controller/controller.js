@@ -24,7 +24,7 @@ module.exports = function (app) {
             var $ = cheerio.load(response.data);
             var n = 1;
 
-            // Grab media articles
+            // Grab media articles ** this selector needs changed in 4 places if new scraping classes
             $("div.horizontal-card-item").each(function (i, element) {
                 
                 var result = {};
@@ -58,7 +58,7 @@ module.exports = function (app) {
                                     .then(function (dbArticle) {
                                         console.log("Article Added");
                                         console.log(dbArticle);
-                                        if (n == $("article.media").length) {
+                                        if (n == $("div.horizontal-card-item").length) {
                                             db.Article.find({}).sort({date: -1}).
                                             then(function (data) {
                                                 var hbsObj = {
@@ -84,7 +84,7 @@ module.exports = function (app) {
                                 db.Article.create(result)
                                     .then(function (dbArticle) {
                                         console.log("Article Added and notes from saved fused!");
-                                        if (n == $("article.media").length) {
+                                        if (n == $("div.horizontal-card-item").length) {
                                             db.Article.find({}).sort({date: -1}).
                                             then(function (data) {
                                                 var hbsObj = {
@@ -109,7 +109,7 @@ module.exports = function (app) {
                         })
                     } else {
                         console.log("Article already exists in currents");
-                        if (n == $("article.media").length) {
+                        if (n == $("div.horizontal-card-item").length) {
                             db.Article.find({}).sort({date: -1}).
                             then(function (data) {
                                 var hbsObj = {
