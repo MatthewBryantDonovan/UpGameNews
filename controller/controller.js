@@ -25,21 +25,21 @@ module.exports = function (app) {
             var n = 1;
 
             // Grab media articles
-            $("article.media").each(function (i, element) {
+            $("div.horizontal-card-item").each(function (i, element) {
                 
                 var result = {};
 
                 result.title = $(this)
-                    .find(".media-title")
+                    .find(".horizontal-card-item__title")
                     .text();
                 result.summary = $(this)
-                    .find(".media-deck")
+                    .find(".horizontal-card-item__title")
                     .text();
                 result.link = $(this)
-                    .find(".js-click-tag")
+                    .find(".horizontal-card-item__link ")
                     .attr("href");
                 result.img = $(this)
-                    .find(".media-img img")
+                    .find(".horizontal-card-item__img img")
                     .attr("src");
 
                 // See if article exists already
@@ -57,6 +57,7 @@ module.exports = function (app) {
                                 db.Article.create(result)
                                     .then(function (dbArticle) {
                                         console.log("Article Added");
+                                        console.log(dbArticle);
                                         if (n == $("article.media").length) {
                                             db.Article.find({}).sort({date: -1}).
                                             then(function (data) {
